@@ -1,16 +1,15 @@
-<table class="table">
-  <thead>
-    <th>Name</th>
-    <th>Title</th>
-    <th>Price</th>
-    <th>Description</th>
-  </thead>
-  <tbody>
-    <tr *ngFor="let product of products">
-      <td>{{ product.name }}</td>
-      <td>{{ product.title }}</td>
-      <td>{{product.price}}</td>
-      <td>{{product.description}}</td>
-    </tr>
-  </tbody>
-</table>
+<!-- <mat-progress-bar mode="indeterminate"></mat-progress-bar> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <app-header></app-header>
+    <router-outlet></router-outlet>  
+</body>
+    <app-footer></app-footer>
+</html>

@@ -1,0 +1,38 @@
+table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  .mat-elevation-z8{
+    width: 100%;
+  }
+  
+.button{
+  display: block;
+  text-transform: uppercase;
+  font-size: .75rem;
+  font-weight: 700;
+  width: 100%;
+  color: #000;
+  margin-left: 10px;
+}
+
+.button:hover{
+background-color: #000;
+color: #fff;
+transition: .5s ease-in-out;
+border-radius: 0;
+}
+
+.h-fab{
+  color: rgba(1, 1, 1, 0.874)
+}
+
+.h-fab:hover{
+  background-color: #000;
+  color: #fff;
+  transition: .5s ease-in-out;
+}

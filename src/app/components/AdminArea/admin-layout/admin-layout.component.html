@@ -1,0 +1,14 @@
+<div *ngIf="ifUserAdmin">
+    <button class="button" mat-button  (click)="drawer.toggle()">Menu</button>
+</div>
+<mat-drawer-container class="example-container" autosize>
+    <mat-drawer #drawer class="example-sidenav" mode="side">
+        <button class="button" mat-button>Products</button>
+        <button class="button" mat-button>Products</button>
+        <button class="button" mat-button>Products</button>
+        <button class="button" mat-button>Products</button>
+    </mat-drawer>
+    <div class="example-sidenav-content">
+      <app-admin-product></app-admin-product>
+    </div>
+</mat-drawer-container>

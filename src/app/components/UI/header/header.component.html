@@ -1,0 +1,52 @@
+<mat-toolbar>
+  <div class="toolbar no-select" routerLink="">
+    <span>Online Shop</span>
+  </div>
+  <!-- <button mat-button routerLink="product"><mat-icon>menu</mat-icon></button> -->
+  <mat-menu #navigation="matMenu">
+    <button mat-menu-item [matMenuTriggerFor]="productList" routerLink="product">Products</button>
+    <button mat-menu-item [matMenuTriggerFor]="brandList" routerLink="product">Brands</button>
+  </mat-menu>
+  <mat-menu #productList="matMenu">
+    <button mat-menu-item>Insects</button>
+    <button mat-menu-item>Molluscs</button>
+    <button mat-menu-item>Crustaceans</button>
+    <button mat-menu-item>Corals</button>
+    <button mat-menu-item>Arachnids</button>
+    <button mat-menu-item>Velvet worms</button>
+    <button mat-menu-item>Horseshoe crabs</button>
+  </mat-menu>
+  <mat-menu #brandList="matMenu">
+    <button mat-menu-item>Insects</button>
+    <button mat-menu-item>Molluscs</button>
+    <button mat-menu-item>Crustaceans</button>
+    <button mat-menu-item>Corals</button>
+    <button mat-menu-item>Arachnids</button>
+    <button mat-menu-item>Velvet worms</button>
+    <button mat-menu-item>Horseshoe crabs</button>
+  </mat-menu>
+  <span class="example-spacer"></span>
+  <div class="toolbar no-select">
+    <button class="h-fab" mat-button routerLink="cart"><mat-icon>shopping_cart</mat-icon></button>
+    <button class="h-fab" mat-button [matMenuTriggerFor]="menu" ><mat-icon>person</mat-icon></button>
+    <button class="h-fab" mat-button [matMenuTriggerFor]="navigation"><mat-icon>menu</mat-icon></button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>manage_accounts</mat-icon>
+        <span>User info</span>
+      </button>
+      <button mat-menu-item routerLink="AdminArea/adminlayout">
+        <mat-icon>admin_panel_settings</mat-icon>
+        <span>Admin panel</span>
+      </button>
+      <button mat-menu-item *ngIf="!ifUserAuthorize">
+        <mat-icon>login</mat-icon>
+        <span>Login</span>
+      </button>
+      <button mat-menu-item *ngIf="ifUserAuthorize">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+  </div>
+</mat-toolbar>
