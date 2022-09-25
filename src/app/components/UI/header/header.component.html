@@ -39,11 +39,12 @@
         <mat-icon>admin_panel_settings</mat-icon>
         <span>Admin panel</span>
       </button>
-      <button mat-menu-item *ngIf="!ifUserAuthorize">
+      <button routerLink="Authorization/login"  mat-menu-item *ngIf="!ifUserAuthorize">
         <mat-icon>login</mat-icon>
         <span>Login</span>
       </button>
-      <button mat-menu-item *ngIf="ifUserAuthorize">
+      <button mat-menu-item *ngIf="ifUserAuthorize"
+        (click)="logout()">
         <mat-icon>logout</mat-icon>
         <span>Logout</span>
       </button>

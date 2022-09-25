@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import {MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
 @Component({
@@ -9,30 +9,34 @@ import {MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@angula
   styleUrls: ['./dialog-box.component.css']
 })
 export class DialogBoxComponent implements OnInit {
-
-  productForm: FormGroup = new FormGroup({
-    id: new FormControl(''), 
-    name: new FormControl(''),
-    title: new FormControl(''), 
-    imgUrl: new FormControl(''), 
-    description: new FormControl(''), 
-    price: new FormControl(''),
-    brandId: new FormControl('')
-  });
-  
-
   constructor(
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<DialogBoxComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
-
-  onNoClick(): void {
-    this.dialogRef.close();
+  ) {
+    if(this.data)
+      this.isNew = false;
   }
 
-  onCreate(){
+  isNew: boolean = true;
+  
+  productForm: FormGroup = new FormGroup({
+    id: new FormControl(this.data?.id ?? crypto.randomUUID()), 
+    name: new FormControl(this.data?.name ?? ''),
+    title: new FormControl(this.data?.title ?? ''), 
+    imgUrl: new FormControl(this.data?.imgUrl ?? ''), 
+    description: new FormControl(this.data?.description ?? ''), 
+    price: new FormControl(this.data?.price ?? ''),
+    brandId: new FormControl(this.data?.brandId ?? '')
+  });
+
+  onNoClick(): void {
+    this.dialogRef.close(null);
+  }
+
+  onSubmit(){
     this.data = {
+      id: this.productForm.value.id,
       name: this.productForm.value.name,
       title: this.productForm.value.title,
       price: this.productForm.value.price,
@@ -40,14 +44,10 @@ export class DialogBoxComponent implements OnInit {
       description: this.productForm.value.description,
       brandId: "4b40b766-f054-455d-be9d-30f22a80b48c"
     };
+    console.log(this.data)
     this.dialogRef.close(this.data);
-  }
-
-  onSubmit(){
-    console.log(this.productForm);
   }
 
   ngOnInit(): void {
   }
-
 }

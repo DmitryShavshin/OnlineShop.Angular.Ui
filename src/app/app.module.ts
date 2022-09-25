@@ -12,11 +12,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatTableModule } from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatInputModule} from '@angular/material/input';
-
-
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EditBrandComponent } from './components/edit-brand/edit-brand.component';
@@ -30,8 +28,13 @@ import { BaseComponent } from './components/base/base.component';
 import { DialogBoxComponent } from './components/UI/dialog-box/dialog-box.component';
 import { AdminLayoutComponent } from './components/AdminArea/admin-layout/admin-layout.component';
 import { AdminProductComponent } from './components/AdminArea/admin-product/admin-product.component';
-
-
+import { LoginComponent } from './components/Authorization/login/login.component';
+import { RegistrationComponent } from './components/Authorization/registration/registration.component';
+import { JwtModule } from '@auth0/angular-jwt';
+import { ACCESS_TOKEN_KEY } from './services/auth.service';
+export function tokenGetter(){
+  return localStorage.getItem(ACCESS_TOKEN_KEY);
+}
 
 @NgModule({
   declarations: [
@@ -46,7 +49,9 @@ import { AdminProductComponent } from './components/AdminArea/admin-product/admi
     BaseComponent,
     DialogBoxComponent,
     AdminLayoutComponent,
-    AdminProductComponent
+    AdminProductComponent,
+    LoginComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
@@ -65,8 +70,15 @@ import { AdminProductComponent } from './components/AdminArea/admin-product/admi
     MatTableModule,
     MatPaginatorModule,
     MatDialogModule,
-    MatInputModule,ReactiveFormsModule,
-    FormsModule
+    MatInputModule,
+    ReactiveFormsModule,
+    FormsModule,
+
+     JwtModule.forRoot({
+      config: {
+        tokenGetter
+      }
+     })
   ],
   providers: [],
   bootstrap: [AppComponent]

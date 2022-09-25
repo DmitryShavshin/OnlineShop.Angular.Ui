@@ -1,4 +1,12 @@
 
+
+export interface ICart{
+    cartId: string;
+    productId: string;
+    product: IProduct;
+    amount: number;
+}
+
 export interface IProduct{
     id?: string; 
     name: string;
@@ -8,7 +16,3 @@ export interface IProduct{
     price: number;
     brandId?: string;
 }
-
-// export interface IProductCategory{
-
-// }
