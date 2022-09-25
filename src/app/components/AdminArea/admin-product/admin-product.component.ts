@@ -49,18 +49,62 @@ export class AdminProductComponent implements AfterViewInit {
       this.productSubscription.unsubscribe();
   }
 
-  openDialog(): void {
+  openDialog(product?: IProduct): void {
     let dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
-    const dialogRef = this.dialog.open(DialogBoxComponent);
-    dialogRef.afterClosed().subscribe((data) => this.postData(data));
+    dialogConfig.data = product;
+    
+    const dialogRef = this.dialog.open(DialogBoxComponent, dialogConfig);
+    
+    // Create Product after close dialog ref
+    dialogRef.afterClosed().subscribe((data) => {
+      if(data){
+        if(product?.id === data.id)
+          this.updateProduct(data);
+        else
+          this.createProduct(data);
+      }
+    });
   }
 
-  postData(data: IProduct){
-    console.log(data)
+  // Edit product 
+  // Ref localhost:7186/api/Product/UpdateProduct
+  updateProduct(product: IProduct){
+    this.productService.updateProduct(product)
+      .subscribe((data) => {
+        this.products = this.products.map((product) => {
+          if(product.id === data.id)
+            return data;
+          else
+            return product;
+      });
+    });
+  }
+
+  // Create product 
+  // Ref localhost:7186/api/Product/CreateProduct
+  createProduct(data: IProduct){
     this.productService
       .createProduct(data)
       .subscribe((data) => this.products = data);
+  }
+
+  // Find info about product by {id}
+  // Ref localhost:7186/api/Product/GetProduct/id
+  infoProduct(id: string){
+    console.log(id);
+    this.productSubscription = this.productService
+      .getProduct(id)
+      .subscribe((data) => { this.product = data });
+  }
+  
+  // Delete product by {id}
+  // Ref localhost:7186/api/Product/Delete/id
+  deleteProduct(id: string){
+    console.log(id);
+    this.productService
+      .deleteProduct(id)
+      .subscribe((data) => { this.products = data });
   }
 
   ngAfterViewInit() {
@@ -76,23 +120,5 @@ export class AdminProductComponent implements AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
-  }
-
-  infoProduct(id: string){
-    console.log(id);
-    this.productSubscription = this.productService
-      .getProduct(id)
-      .subscribe((data) => { this.product = data });
-  }
-  
-  deleteProduct(id: string){
-    console.log(id);
-    this.productService
-      .deleteProduct(id)
-      .subscribe((data) => { this.products = data });
-  }
-
-  editProduct(product: IProduct){
-    console.log(product);
   }
 }

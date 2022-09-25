@@ -1,0 +1,46 @@
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+
+  .button{
+    display: block;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: .75rem;
+    font-weight: 700;
+    width: 100%;
+}
+
+.button:hover{
+  background-color: #000;
+  color: #fff;
+  transition: .5s ease-in-out;
+  border-radius: 0;
+}
+
+.conteiner-auth{
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.link{
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #000;
+  font-size: .9em;
+  letter-spacing: .1em;
+}
+
+.link:hover{
+  cursor: pointer;
+  color: rgb(45, 44, 44);
+  transition: .5s ease;
+}

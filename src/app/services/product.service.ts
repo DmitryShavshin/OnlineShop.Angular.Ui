@@ -35,7 +35,7 @@ export class ProductService {
   }
 
   public updateProduct(product: IProduct){
-    return this.http.put<IProduct[]>(`${environment.apiUrl}/${this.url}/${this.productUpdate}`, product);
+    return this.http.put<IProduct>(`${environment.apiUrl}/${this.url}/${this.productUpdate}`, product);
   }
 
   // private url = "Product";
