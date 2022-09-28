@@ -15,19 +15,18 @@ import { ProductService } from 'src/app/services/product.service';
 
 
 export class AdminLayoutComponent implements OnInit {
+  
+  constructor(private productService: ProductService) { 
+    this.dataSource = new MatTableDataSource(this.products);
+  }
+ 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   productSubscription?: Subscription;
   products: IProduct[] = [];
   dataSource: MatTableDataSource<IProduct>;
   ifUserAdmin: boolean = true;
-
-  
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-  
-  constructor(private productService: ProductService) { 
-    this.dataSource = new MatTableDataSource(this.products);
-  }
 
   ngOnInit(): void {
     this.ifUserAdmin = true;

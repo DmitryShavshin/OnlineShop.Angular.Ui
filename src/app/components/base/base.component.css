@@ -1,0 +1,50 @@
+.example-card{
+    width: 320px;
+    height: 450px;
+    margin: 20px 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.mat-card-header{
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: 1.1rem;
+}
+
+.mat-card-content{
+    margin: 0 auto;
+    max-width: 300px;
+    text-align: center;
+}
+
+.image{
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.mat-button:hover{
+    background-color: #000;
+    color: #fff;
+    transition: .5s ease-in-out;
+    border-radius: 0;
+}
+
+.mat-card-actions{
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+.product-price{
+    display: flex;
+    justify-content: start;
+    font-size: .9rem;
+    font-weight: 600;
+}
+
+.button{
+    text-transform: uppercase;
+    font-size: .75rem;
+    font-weight: 700;
+}

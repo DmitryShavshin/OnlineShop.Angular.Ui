@@ -1,27 +1,26 @@
-import { Component, OnInit } from '@angular/core';
-import { Subscribable, Subscription } from 'rxjs';
+import { Component, Injectable, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ICart } from 'src/app/models/ICart';
-import { CartService } from 'src/app/services/cart.service';
+import { IProduct } from 'src/app/models/product';
+import { CartService, CART_ID } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
+@Injectable()
 export class CartComponent implements OnInit {
+ 
   constructor(private cartSevice: CartService) { }
 
-  cart!: ICart;
-  cartSubscription?: Subscription;
-
+  cart: ICart[] = [];
+  products: IProduct[] = [];
 
   ngOnInit(): void {
-    // this.cartSubscription = this.cartSevice
-    //   .getProductsFromCart()
-    //   .subscribe( (data: ICart) => { 
-    //     this.cart = data 
-    // });
-    // console.log(this.cart)
+    if(localStorage.getItem(CART_ID)){
+      const raw = localStorage.getItem(CART_ID);
+      this.cart = JSON.parse(raw as string);
+    }
   }
-
 }
