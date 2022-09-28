@@ -5,20 +5,30 @@
               <mat-label>Email</mat-label>
               <input type="email" matInput [formControl]="emailFormControl" 
                      placeholder="Ex. pat@example.com">
-              <mat-hint>Errors appear instantly!</mat-hint>
-              <!-- <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                Please enter a valid email address
+              <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                Please enter a valid email
               </mat-error>
               <mat-error *ngIf="emailFormControl.hasError('required')">
                 Email is <strong>required</strong>
-              </mat-error> -->
+              </mat-error>
             </mat-form-field>
             <mat-form-field class="example-full-width" appearance="fill">   
                 <mat-label>Password</mat-label>
                 <input type="password" matInput [formControl]="passwordFormControl">
-                <mat-hint>Errors appear instantly!</mat-hint>
+                <mat-error *ngIf="passwordFormControl.hasError('pattern') && !passwordFormControl.hasError('required')">
+                  Please enter a valid password
+                </mat-error>
+                <mat-error *ngIf="passwordFormControl.hasError('required')">
+                  Password is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="passwordFormControl.hasError('minLength')">
+                  Password must be have min 8 caharacters
+                </mat-error>
+                <mat-error *ngIf="passwordFormControl.hasError('maxLength')">
+                  Password must be have max 20 caharacters
+                </mat-error>
             </mat-form-field>
-            <button class="button" type="submit" mat-menu-item 
+            <button class="button" type="submit" mat-menu-item
                 (click)="login(emailFormControl.value, passwordFormControl.value)">LogIn
             </button>
             <div class="toolbar no-select link" routerLink="Authorization/registration">

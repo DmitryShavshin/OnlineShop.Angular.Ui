@@ -19,14 +19,6 @@ import { DialogBoxComponent } from '../../UI/dialog-box/dialog-box.component';
 })
 
 export class AdminProductComponent implements AfterViewInit {
-  displayedColumns: string[] = ['id', 'name', 'title', 'price', 'create'];
-  productSubscription?: Subscription;
-  products: IProduct[] = [];
-  product?: IProduct;
-  dataSource!: MatTableDataSource<IProduct>;
-
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
     private productService: ProductService,
@@ -35,18 +27,19 @@ export class AdminProductComponent implements AfterViewInit {
     this.dataSource = new MatTableDataSource(this.products);
   }
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  displayedColumns: string[] = ['id', 'name', 'title', 'price', 'create'];
+  dataSource!: MatTableDataSource<IProduct>;
+  products: IProduct[] = [];
+  product?: IProduct;
+
   ngOnInit(): void {
-    this.productSubscription = this.productService
-    .getProducts()
-    .subscribe(( data: IProduct[] ) => 
+    this.productService.getProducts().subscribe(( data: IProduct[] ) => 
     {
       this.products = data;
     });
-  }
-
-  ngOnDestroy(){
-    if(this.productSubscription)
-      this.productSubscription.unsubscribe();
   }
 
   openDialog(product?: IProduct): void {
@@ -84,27 +77,21 @@ export class AdminProductComponent implements AfterViewInit {
   // Create product 
   // Ref localhost:7186/api/Product/CreateProduct
   createProduct(data: IProduct){
-    this.productService
-      .createProduct(data)
-      .subscribe((data) => this.products = data);
+    this.productService.createProduct(data).subscribe((data) => this.products = data);
   }
 
   // Find info about product by {id}
   // Ref localhost:7186/api/Product/GetProduct/id
   infoProduct(id: string){
     console.log(id);
-    this.productSubscription = this.productService
-      .getProduct(id)
-      .subscribe((data) => { this.product = data });
+    this.productService.getProduct(id).subscribe((data) => { this.product = data });
   }
   
   // Delete product by {id}
   // Ref localhost:7186/api/Product/Delete/id
   deleteProduct(id: string){
     console.log(id);
-    this.productService
-      .deleteProduct(id)
-      .subscribe((data) => { this.products = data });
+    this.productService.deleteProduct(id).subscribe((data) => { this.products = data });
   }
 
   ngAfterViewInit() {

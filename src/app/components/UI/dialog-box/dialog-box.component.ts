@@ -9,6 +9,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
   styleUrls: ['./dialog-box.component.css']
 })
 export class DialogBoxComponent implements OnInit {
+ 
   constructor(
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<DialogBoxComponent>,
@@ -30,6 +31,9 @@ export class DialogBoxComponent implements OnInit {
     brandId: new FormControl(this.data?.brandId ?? '')
   });
 
+  ngOnInit(): void {
+  }
+  
   onNoClick(): void {
     this.dialogRef.close(null);
   }
@@ -48,6 +52,5 @@ export class DialogBoxComponent implements OnInit {
     this.dialogRef.close(this.data);
   }
 
-  ngOnInit(): void {
-  }
+
 }
