@@ -1,9 +1,9 @@
-import { Injectable } from "@angular/core";
-import { ICart } from "./ICart";
 import { IProduct } from "./product";
 
-@Injectable()
-export class Cart{
-    public cart: ICart[] = [];
-    
+
+export interface ICart{
+    cartId: string;
+    product: IProduct;
+    amount: number;
+    totalPrice?: number;
 }

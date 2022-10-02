@@ -36,3 +36,7 @@ border-radius: 0;
   color: #fff;
   transition: .5s ease-in-out;
 }
+
+.container{
+  padding-top: 0;
+}

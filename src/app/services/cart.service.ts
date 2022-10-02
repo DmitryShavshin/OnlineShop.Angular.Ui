@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap, timeout, timer } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ICart } from '../models/ICart';
-import { IProduct } from '../models/product';
+import { ICart } from '../models/cart';
+
 
 export const CART_ID = 'cart_Id';
 
@@ -15,16 +15,10 @@ export class CartService {
 
   private url = "Cart";
   private addToCart = "AddToCart";
-  private getProducts = "getProductsFromCart";
-
-  // addProductToCart(id?: string, cartId?: string): Observable<ICart[]>{
-  //    return this.http.post<ICart[]>(`${environment.apiUrl}/${this.url}/${this.addToCart}/${id}`, id);
-  //   //  .pipe(cart => {
-  //   //   cart.forEach(element => {
-  //   //     localStorage.setItem(CART_ID,  element.cartId as string)
-  //   //   });  
-  //   // });
-  // }
+  private minusCounRoute = "MinusCount";
+  private removeProductRoute = "RemoveProduct";
+  private getProducts = "GetProductsFromCart";
+  private clearCartRoute = "ClearCart";
 
   addProductToCart(productId?: string, cartId?: string): Observable<ICart[]>{
     console.log(productId, cartId)
@@ -32,26 +26,43 @@ export class CartService {
     .pipe(
       timeout(1000),
       tap(element => {
-        console.log(element)
         localStorage.setItem(CART_ID, JSON.stringify(element))
       })
     );
  }
 
-
   getProductsFromCart(cartId?: string): Observable<ICart[]>{
     return this.http.post<ICart[]>(`${environment.apiUrl}/${this.url}/${this.getProducts}`, {cartId});
   }
 
-  addItem(product: IProduct){
-    
+  minusCount(productId?: string, cartId?: string): Observable<ICart[]>{
+    return this.http.post<ICart[]>(`${environment.apiUrl}/${this.url}/${this.minusCounRoute}`, { cartId, productId })
+    .pipe(
+      tap( element => {
+        localStorage.removeItem(CART_ID)
+        localStorage.setItem(CART_ID, JSON.stringify(element));
+      })
+    );
   }
 
-  removeItem(product: IProduct){
-
+  removeProduct(productId?: string, cartId?: string): Observable<ICart[]>{
+    return this.http.post<ICart[]>(`${environment.apiUrl}/${this.url}/${this.removeProductRoute}`, { cartId, productId })
+    .pipe(
+      tap( element => {
+        localStorage.removeItem(CART_ID)
+        localStorage.setItem(CART_ID, JSON.stringify(element));
+      })
+    );
   }
 
-  removeProduct(product: IProduct){
-
+   clearCart(id?: string): Observable<ICart[]>{
+    return this.http.delete<ICart[]>(`${environment.apiUrl}/${this.url}/${this.clearCartRoute}/${id}`)
+    .pipe(
+      tap( element => {
+        if(!element){
+          localStorage.removeItem(CART_ID);
+        } 
+      })
+    );
   }
 }

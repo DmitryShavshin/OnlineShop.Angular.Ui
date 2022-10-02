@@ -1,4 +1,59 @@
-<p>cart works!</p>
-<!-- <div *ngFor="let item of products">
-    <p>{{ item.name }}</p>
-</div> -->
+<div class="container">
+  <div class="clear-cart-container">
+    <button class="clear-cart-button" (click)="clearCart(cartId)" >clear cart </button>
+  </div>
+    <table mat-table [dataSource]="cart" class="mat-elevation-z8">
+        <!-- Item Column -->
+        <ng-container matColumnDef="item">
+          <th mat-header-cell *matHeaderCellDef> Item </th>
+          <td mat-cell *matCellDef="let row"> {{row.product.name}} </td>
+          <td mat-footer-cell *matFooterCellDef>  </td>
+        </ng-container>
+    
+        <!--Count Column-->
+        <ng-container matColumnDef="count">
+          <th mat-header-cell *matHeaderCellDef> Count </th>
+          <td mat-cell *matCellDef="let row">
+            <button class="btn-cart" (click)="minusCount(row.cartId, row.product.id)">-</button>
+              {{row.amount}} 
+            <button class="btn-cart" (click)="plusCount(row.cartId, row.product.id)">+</button>
+          </td>
+          <td mat-footer-cell *matFooterCellDef> Total: </td>
+        </ng-container>
+    
+        <!-- Cost Column -->
+        <ng-container matColumnDef="cost">
+          <th mat-header-cell *matHeaderCellDef> Cost </th>
+          <td mat-cell *matCellDef="let row"> {{row.product.price | currency}} </td>
+          <td mat-footer-cell *matFooterCellDef> {{getTotalCost() | currency}} </td>
+        </ng-container>
+        
+        <!-- Total Column -->
+        <ng-container matColumnDef="total">
+          <th mat-header-cell *matHeaderCellDef> Total </th>
+          <td mat-cell *matCellDef="let row"> {{row.amount * row.product.price | currency}} </td>
+          <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+
+        <!-- Total Column -->
+        <ng-container matColumnDef="buttons">
+          <th mat-header-cell *matHeaderCellDef="let row" >
+          
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <button class="button" (click)="removeItem(row.cartId, row.product.id)">remove</button>
+          </td>
+          <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+      
+         <!-- The table will render two header rows, one data row per data object, and two footer rows. -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"
+            lass="example-first-header-row">
+        </tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-footer-row *matFooterRowDef="displayedColumns" class="example-first-footer-row"></tr>
+    </table>
+    <div class="order-container">
+      <button class="order-button" (click)="getOrder(cartId)" >order</button>
+    </div>
+</div>
