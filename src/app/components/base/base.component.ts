@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ICart } from 'src/app/models/ICart';
+import { ICart } from 'src/app/models/cart';
 import { IProduct } from 'src/app/models/product';
 import { CartService, CART_ID } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -37,8 +37,7 @@ export class BaseComponent implements OnInit {
       cart.forEach((element: { cartId: any; }) => {
            cartId = element.cartId     
       });
-      console.log(cartId);
-      this.cartService.addProductToCart(id,cartId)
+      this.cartService.addProductToCart(id, cartId)
         .subscribe( (data: ICart[]) => 
           { this.carts = data });
     }else{
