@@ -30,6 +30,7 @@ import { AdminLayoutComponent } from './components/AdminArea/admin-layout/admin-
 import { AdminProductComponent } from './components/AdminArea/admin-product/admin-product.component';
 import { LoginComponent } from './components/Authorization/login/login.component';
 import { RegistrationComponent } from './components/Authorization/registration/registration.component';
+import {MatExpansionModule} from '@angular/material/expansion';
 import { JwtModule } from '@auth0/angular-jwt';
 import { ACCESS_TOKEN_KEY } from './services/auth.service';
 export function tokenGetter(){
@@ -73,6 +74,7 @@ export function tokenGetter(){
     MatInputModule,
     ReactiveFormsModule,
     FormsModule,
+    MatExpansionModule,
 
      JwtModule.forRoot({
       config: {

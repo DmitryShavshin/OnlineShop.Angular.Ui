@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Brand } from 'src/app/models/brand';
+import { IBrand } from 'src/app/models/brand';
 import { BrandSevice } from 'src/app/services/brand.service';
 
 @Component({
@@ -8,8 +8,8 @@ import { BrandSevice } from 'src/app/services/brand.service';
   styleUrls: ['./edit-brand.component.css']
 })
 export class EditBrandComponent implements OnInit {
-  @Input() product?: Brand;
-  @Output() productsUpdated = new EventEmitter<Brand[]>();
+  @Input() product?: IBrand;
+  @Output() productsUpdated = new EventEmitter<IBrand[]>();
   constructor(private brandService: BrandSevice) { }
 
 

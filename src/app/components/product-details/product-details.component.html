@@ -1,2 +1,81 @@
-<p>product-details works!</p>
-<!-- <p>Name: {{ product.name }}</p> -->
+
+<mat-card class="container">
+    
+    <mat-card-actions >
+        <div class="details-wrapper">
+          <div class="content-left">
+            <!-- <mat-card-title>{{ product.name }}</mat-card-title>
+            <mat-card-subtitle>{{ product.title }}</mat-card-subtitle> -->
+            <div class="img-title-container">
+              <img mat-card-image class="image" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+            </div>
+            
+            <div class="details-img-slider">
+              <img class="image-slider" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+              <img class="image-slider" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+              <img class="image-slider" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+              <img class="image-slider" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+            </div>
+          </div>
+          <div class="content-right">
+            <div class="content-right-top">
+              <div class="content-right-about-product">
+                <mat-card-title>{{ product.name }}</mat-card-title>
+                <mat-card-subtitle>{{ product.title }}</mat-card-subtitle>
+                <mat-card-subtitle>{{ product.brand.name }}</mat-card-subtitle>
+              </div>
+              <div class="content-right-about-product">
+                <mat-card-subtitle>{{ product.price | currency }}</mat-card-subtitle>
+                <mat-card-actions align="end">
+                  <button class="button" mat-button>Like</button>
+                  <button class="button" mat-button (click)="addToCart(product.id)">Add to cart</button>
+                </mat-card-actions>
+              </div>
+              <div class="details-info-list">
+                <ul>
+                  <li *ngFor="let item of product.categoryProducts">{{ item.category.name }}</li>
+                  <li>{{ product.brand.name }}</li>
+                  <li>Rate(add description !!!)</li>
+                </ul>
+              </div>
+            </div>
+            <div class="content-right-bottom">
+              <mat-card-content>
+                <div class="example-action-buttons">
+                  <button mat-button (click)="accordion.openAll()">Expand All</button>
+                  <button mat-button (click)="accordion.closeAll()">Collapse All</button>
+                </div>
+                <mat-accordion class="example-headers-align" multi>
+                  <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                       <span class="description">Product</span> Description
+                      </mat-panel-title>
+                    </mat-expansion-panel-header> 
+                    <p>{{ product.description }}</p>
+                  </mat-expansion-panel>
+                  <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        <span class="description">Brand</span> Description
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <p>{{ product.brand.description }}</p>
+                  </mat-expansion-panel>
+                  <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        <span class="description">Category</span> Description
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <ol>
+                      <li class="category-description-list-item" *ngFor="let item of product.categoryProducts">{{ item.category.description }}</li>
+                    </ol>   
+                  </mat-expansion-panel>
+                </mat-accordion> 
+              </mat-card-content>
+            </div>
+          </div>
+        </div>
+    </mat-card-actions>
+</mat-card>

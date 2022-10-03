@@ -1,6 +1,7 @@
-export class Brand{
+export interface IBrand{
     id?: string;
-    name: string = "";
-    title: string = "";
-    description: string = "";
+    name: string;
+    title: string;
+    description: string;
+    imgUrl: string;
 }

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IProduct } from 'src/app/models/product';
-
+import {MatAccordion} from '@angular/material/expansion';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-product-details',
@@ -12,18 +13,22 @@ import { IProduct } from 'src/app/models/product';
 
 
 export class ProductDetailsComponent implements OnInit {
-
+  @ViewChild(MatAccordion)
+  accordion: MatAccordion = new MatAccordion;
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private productService: ProductService
     ) { }
 
-  product?: IProduct;
-  productSubscription?: Subscription
+  product!: IProduct;
+  productFromRoute!: IProduct;
 
   ngOnInit(): void {
-    this.productSubscription = this.route.data
-      .subscribe((data) => { 
-        this.product = data['data'] 
-    });
+    this.route.data.subscribe((data) => { this.productFromRoute = data['data'] });
+    this.productService.getProduct(this.productFromRoute.id).subscribe( (element) => { this.product = element });
+  }
+
+  addToCart(id: string){
+    
   }
 }
